@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,23 +10,15 @@ const supportedLocales = [
 
 describe('user-request-to-join', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `user-request-to-join-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          dojoName: 'Some Dojo',
-          userType: 'Mentor',
-          name: 'Some Name',
-          email: 'someuser@example.com',
-          link: 'http://example.com',
-          year: 2017,
-        },
-        (err, result) => {
-          if (err) throw(err);
-          done();
-        },
-      );
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('user-request-to-join', locale, {
+        dojoName: 'Some Dojo',
+        userType: 'Mentor',
+        name: 'Some Name',
+        email: 'someuser@example.com',
+        link: 'http://example.com',
+        year: 2017,
+      });
     });
   });
 });

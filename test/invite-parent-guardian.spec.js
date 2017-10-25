@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,21 +10,13 @@ const supportedLocales = [
 
 describe('invite-parent-guardian', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `invite-parent-guardian-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          parentName: 'Some Parent',
-          childName: 'Some Child',
-          link: 'http://example.com',
-          year: 2017,
-        },
-        (err, result) => {
-          if (err) throw(err);
-          done();
-        },
-      );
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('invite-parent-guardian', locale, {
+        parentName: 'Some Parent',
+        childName: 'Some Child',
+        link: 'http://example.com',
+        year: 2017,
+      });
     });
   });
 });

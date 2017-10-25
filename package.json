@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/CoderDojo/cp-translations#readme",
   "devDependencies": {
-    "email-templates": "^2.0.1",
     "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "email-templates": "^2.0.1"
   }
 }

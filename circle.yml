@@ -13,14 +13,13 @@ dependencies:
     - npm install
 test:
   override:
-    - echo "Tests can not run without translations"
+    - for lang in it pt-PT de nl ro mt sl sk fr uk es-ES es-AR el pl et bg tr ja hi lt; do crowdin-cli download -l $lang; done
+    - yarn test
 deployment:
   production:
     branch: master
     commands:
       - crowdin-cli upload sources
-      - for lang in it pt-PT de nl ro mt sl sk fr uk es-ES es-AR el pl et bg tr ja hi lt; do crowdin-cli download -l $lang; done
-      - yarn test
       - git config --global user.email "webteam@coderdojo.com"
       - git config --global user.name "CoderDojo Foundation"
       - npm version patch -m "[skip ci] Update to %s"
@@ -30,7 +29,5 @@ deployment:
     branch: staging
     commands:
       - crowdin-cli upload sources -b staging
-      - for lang in it pt-PT de nl ro mt sl sk fr uk es-ES es-AR el pl et bg tr ja hi lt; do crowdin-cli download -b staging -l $lang; done
-      - yarn test
       - npm --no-git-tag-version version `node build/get-version.js`-`git rev-parse --short HEAD`
       - npm publish --tag=staging

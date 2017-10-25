@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,43 +10,35 @@ const supportedLocales = [
 
 describe('ticket-application-approved', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `ticket-application-approved-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          applicantName: 'Joe Bloggs',
-          intro: 'Hello',
-          applicationDate: '01/01/1970',
-          sessionName: 'Scratch',
-          tickets: [
-            {
-              ticketName: 'Parent',
-              ticketType: 'parent-guardian',
-              quantity: 1
-            },
-            {
-              ticketName: 'Youth',
-              ticketType: 'ninja',
-              quantity: 1
-            },
-          ],
-          status: 'Approved',
-          eventDate: '01/01/1970',
-          event: {
-            address: '123 Fake St.',
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('ticket-application-approved', locale, {
+        applicantName: 'Joe Bloggs',
+        intro: 'Hello',
+        applicationDate: '01/01/1970',
+        sessionName: 'Scratch',
+        tickets: [
+          {
+            ticketName: 'Parent',
+            ticketType: 'parent-guardian',
+            quantity: 1
           },
-          dojo: {
-            email: 'mydojo@coderdojo.com',
+          {
+            ticketName: 'Youth',
+            ticketType: 'ninja',
+            quantity: 1
           },
-          applicationId: null,
-          year: 2017,
+        ],
+        status: 'Approved',
+        eventDate: '01/01/1970',
+        event: {
+          address: '123 Fake St.',
         },
-        (err, result) => {
-          if (err) throw(err);
-          done();
+        dojo: {
+          email: 'mydojo@coderdojo.com',
         },
-      );
+        applicationId: null,
+        year: 2017,
+      });
     });
   });
 });

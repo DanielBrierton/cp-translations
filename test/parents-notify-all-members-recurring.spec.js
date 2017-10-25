@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,28 +10,20 @@ const supportedLocales = [
 
 describe('parents-notify-all-members-recurring', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `parents-notify-all-members-recurring-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          dojoMember: 'Some Name',
-          event: {
-            name: 'Some Event',
-          },
-          dojo: {
-            name: 'Some Dojo',
-            email: 'somedojo@coderdojo.com'
-          },
-          childrenName: 'Some Child',
-          link: 'http://example.com',
-          year: 2017,
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('parents-notify-all-members-recurring', locale, {
+        dojoMember: 'Some Name',
+        event: {
+          name: 'Some Event',
         },
-        (err, result) => {
-          if (err) throw(err);
-          done();
+        dojo: {
+          name: 'Some Dojo',
+          email: 'somedojo@coderdojo.com'
         },
-      );
+        childrenName: 'Some Child',
+        link: 'http://example.com',
+        year: 2017,
+      });
     });
   });
 });

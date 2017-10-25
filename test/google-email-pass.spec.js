@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,21 +10,13 @@ const supportedLocales = [
 
 describe('google-email-pass', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `google-email-pass-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          dojo: 'Some Dojo',
-          email: 'somedojo@coderdojo.com',
-          temp_pass: 'MyTempPass',
-          year: 2017,
-        },
-        (err, result) => {
-          if (err) throw(err);
-          done();
-        },
-      );
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('google-email-pass', locale, {
+        dojo: 'Some Dojo',
+        email: 'somedojo@coderdojo.com',
+        temp_pass: 'MyTempPass',
+        year: 2017,
+      });
     });
   });
 });

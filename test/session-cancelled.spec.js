@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,24 +10,16 @@ const supportedLocales = [
 
 describe('session-cancelled', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `session-cancelled-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          applicantName: 'Some Name',
-          eventDate: '01/01/1970',
-          sessionName: 'Scratch',
-          dojo: {
-            name: 'Some Dojo',
-          },
-          year: 2017,
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('session-cancelled', locale, {
+        applicantName: 'Some Name',
+        eventDate: '01/01/1970',
+        sessionName: 'Scratch',
+        dojo: {
+          name: 'Some Dojo',
         },
-        (err, result) => {
-          if (err) throw(err);
-          done();
-        },
-      );
+        year: 2017,
+      });
     });
   });
 });

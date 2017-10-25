@@ -1,5 +1,4 @@
-const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+const renderTemplate = require('./helpers/renderTemplate');
 
 const supportedLocales = [
   'bg_BG', 'de_DE', 'el_GR', 'en_US', 'es_AR',
@@ -11,29 +10,21 @@ const supportedLocales = [
 
 describe('ticket-application-cancelled', () => {
   supportedLocales.forEach((locale) => {
-    it(`should render ${locale}`, (done) => {
-      const templateDir = path.join(__dirname, '../', 'email-templates', `ticket-application-cancelled-${locale}`);
-      const template = new EmailTemplate(templateDir);
-      template.render(
-        {
-          applicantName: 'Some Name',
-          intro: 'Intro!',
-          applicationDate: '01/01/1970',
-          sessionName: 'Scratch',
-          eventDate: '01/01/1970',
-          event: {
-            address: '123 Fake St.',
-          },
-          dojo: {
-            email: 'somedojo@coderdojo.com',
-          },
-          year: 2017,
+    it(`should render ${locale}`, async () => {
+      await renderTemplate('ticket-application-cancelled', locale, {
+        applicantName: 'Some Name',
+        intro: 'Intro!',
+        applicationDate: '01/01/1970',
+        sessionName: 'Scratch',
+        eventDate: '01/01/1970',
+        event: {
+          address: '123 Fake St.',
         },
-        (err, result) => {
-          if (err) throw(err);
-          done();
+        dojo: {
+          email: 'somedojo@coderdojo.com',
         },
-      );
+        year: 2017,
+      });
     });
   });
 });
