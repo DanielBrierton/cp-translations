@@ -4020,5 +4020,8 @@ msgstr "Phone number is invalid"
 msgid "Parent email address is required"
 msgstr "Parent email address is required"
 
-msgid "Prefered gender is required"
-msgstr "Prefered gender is required"
+msgid "Preferred gender"
+msgstr "Preferred gender"
+
+msgid "Preferred gender is required"
+msgstr "Preferred gender is required"
