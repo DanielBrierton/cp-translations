@@ -4007,3 +4007,18 @@ msgstr "Your Dojo must ve verified in order to use that functionnality"
 
 msgid "Congratulations on creating your event. When your Dojo is verified by the CoderDojo team, it will appear on your public listing."
 msgstr "Congratulations on creating your event. When your Dojo is verified by the CoderDojo team, it will appear on your public listing."
+
+msgid "Last name is required"
+msgstr "Last name is required"
+
+msgid "Phone number is required"
+msgstr "Phone number is required"
+
+msgid "Phone number is invalid"
+msgstr "Phone number is invalid"
+
+msgid "Parent email address is required"
+msgstr "Parent email address is required"
+
+msgid "Prefered gender is required"
+msgstr "Prefered gender is required"
