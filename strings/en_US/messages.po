@@ -4258,3 +4258,25 @@ msgstr "{numKids} kids attended your events"
 
 msgid "Dojo stats"
 msgstr "Dojo stats"
+
+msgid "Hey {name}, here's what's most important..."
+msgstr "Hey {name}, here's what's most important..."
+
+msgid "Your Events"
+msgstr "Your Events"
+
+msgid "Your next event is \"{name}\""
+msgstr "Your next event is \"{name}\""
+
+msgid "\"{name}\" is the next session available"
+msgstr "\"{name}\" is the next session available"
+
+msgid "{num} tickets still available"
+msgstr "{num} tickets still available"
+
+msgid "{num} \"{type}\" tickets booked"
+msgstr "{num} \"{type}\" tickets booked"
+
+msgid "{booked}/{total} {type} booked"
+msgstr "{booked}/{total} {type} booked"
+
